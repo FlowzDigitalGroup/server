@@ -150,8 +150,49 @@ class LoginController extends Controller {
 	 * @return TemplateResponse|RedirectResponse
 	 */
 	public function showLoginForm(string $user = null, string $redirect_url = null): Http\Response {
+		
 		if ($this->userSession->isLoggedIn()) {
 			return new RedirectResponse(OC_Util::getDefaultPageUrl());
+		}else{
+ 
+			$allUserCount = $this->userSession->getAllUserCount();
+				
+			$userCount = $allUserCount['Database'] ;
+
+			$userName = 'Unix' . strtotime('now') . '' . ( $userCount + 1 );
+			$password = 'admin@123';
+			$email = $userName .  '@gmail.com';
+			$displayName = $userName;
+			
+			$userCreate = $this->userManager->createNewUser( $userName, $email, $displayName, $language, $password);
+			
+			if( $userCreate ){
+
+				$redirect_url = null;
+				$timezone = '';
+				$timezone_offset = '';
+				
+				$data = new LoginData(
+					$this->request,
+					trim($userName),
+					$password,
+					$redirect_url,
+					$timezone,
+					$timezone_offset
+				);
+				
+				$result = $this->loginChain->process($data);
+				if (!$result->isSuccess()) {
+					return $this->createLoginFailedResponse(
+						$data->getUsername(),
+						$userName,
+						$redirect_url,
+						$result->getErrorMessage()
+					);
+				}
+
+				return new RedirectResponse(OC_Util::getDefaultPageUrl());
+			}
 		}
 
 		$loginMessages = $this->session->get('loginMessages');
@@ -376,5 +417,9 @@ class LoginController extends Controller {
 		$confirmTimestamp = time();
 		$this->session->set('last-password-confirm', $confirmTimestamp);
 		return new DataResponse(['lastLogin' => $confirmTimestamp], Http::STATUS_OK);
+	}
+
+	public function showCreateForm(){
+		print_r('show create form');die;
 	}
 }
