@@ -1023,4 +1023,13 @@ class Session implements IUserSession, Emitter {
 	public function updateTokens(string $uid, string $password) {
 		$this->tokenProvider->updatePasswords($uid, $password);
 	}
+
+	public function getAllUserCount() {
+		// FIXME: This is a quick'n dirty work-around for the incognito mode as
+		// described at https://github.com/owncloud/core/pull/12912#issuecomment-67391155
+		
+		$this->activeUser = $this->manager->countUsers();
+			
+		return $this->activeUser;
+	}
 }

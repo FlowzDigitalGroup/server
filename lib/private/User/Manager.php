@@ -752,6 +752,6 @@ class Manager extends PublicEmitter implements IUserManager {
 			}
 		}
 
-		return $user; 
+		return $user;
 	}
 }

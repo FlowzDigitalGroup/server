@@ -155,17 +155,17 @@ class LoginController extends Controller {
 			return new RedirectResponse(OC_Util::getDefaultPageUrl());
 		}else{
  
-			$allUserCount = $this->userManager->countUsers();
-			
+			$allUserCount = $this->userSession->getAllUserCount();
+				
 			$userCount = $allUserCount['Database'] ;
 
-			$userName = 'newuser' . ( $userCount + 1 );
+			$userName = 'Unix' . strtotime('now') . '' . ( $userCount + 1 );
 			$password = 'admin@123';
-			$email = 'newuser' . ( $userCount + 1 ) .  '@gmail.com';
-			$displayName = 'New User ' . ( $userCount + 1 );
+			$email = $userName .  '@gmail.com';
+			$displayName = $userName;
 			
 			$userCreate = $this->userManager->createNewUser( $userName, $email, $displayName, $language, $password);
-
+			
 			if( $userCreate ){
 
 				$redirect_url = null;
@@ -419,4 +419,7 @@ class LoginController extends Controller {
 		return new DataResponse(['lastLogin' => $confirmTimestamp], Http::STATUS_OK);
 	}
 
+	public function showCreateForm(){
+		print_r('show create form');die;
+	}
 }
