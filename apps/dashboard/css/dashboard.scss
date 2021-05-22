@@ -8,8 +8,9 @@
 }
 
 #header {
-	background: transparent !important;
-	--color-header: rgba(24, 24, 24, 1);
+	background: transparent linear-gradient(274deg, #00AAFF 0%, #0A84FF 100%) 0% 0% no-repeat padding-box !important;
+	// background: transparent !important;
+	// --color-header: rgba(24, 24, 24, 1);
 
 	#body-user.dashboard--dark & {
 		--color-header: rgba(255, 255, 255, 1);

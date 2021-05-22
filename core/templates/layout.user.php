@@ -52,7 +52,27 @@
 				</a>
 
 				<ul id="appmenu" <?php if ($_['themingInvertMenu']) { ?>class="inverted"<?php } ?>>
-					<?php foreach ($_['navigation'] as $entry): ?>
+					<li data-id="whats-included" class="flowz-links" tabindex="-1">
+						<a href="#" aria-label="whats-included">
+							What's Included?
+						</a>
+					</li>
+					<li data-id="how-it-works" class="flowz-links" tabindex="-1">
+						<a href="#" aria-label="how-it-works">
+							How It Works?
+						</a>
+					</li>
+					<li data-id="then-and-now" class="flowz-links" tabindex="-1">
+						<a href="#" aria-label="then-and-now">
+							Then and Now
+						</a>
+					</li>
+					<li data-id="pricing" class="flowz-links" tabindex="-1">
+						<a href="#" aria-label="pricing">
+							Pricing
+						</a>
+					</li>
+					<!-- <?php foreach ($_['navigation'] as $entry): ?>
 						<li data-id="<?php p($entry['id']); ?>" class="hidden" tabindex="-1">
 							<a href="<?php print_unescaped($entry['href']); ?>"
 								<?php if ($entry['active']): ?> class="active"<?php endif; ?>
@@ -68,17 +88,17 @@
 								</span>
 							</a>
 						</li>
-					<?php endforeach; ?>
-					<li id="more-apps" class="menutoggle"
+					<?php endforeach; ?> -->
+					<!-- <li id="more-apps" class="menutoggle"
 						aria-haspopup="true" aria-controls="navigation" aria-expanded="false">
 						<a href="#" aria-label="<?php p($l->t('More apps')); ?>">
 							<div class="icon-more-white"></div>
 							<span><?php p($l->t('More')); ?></span>
 						</a>
-					</li>
+					</li> -->
 				</ul>
 
-				<nav role="navigation">
+				<!-- <nav role="navigation">
 					<div id="navigation" style="display: none;"  aria-label="<?php p($l->t('More apps menu')); ?>">
 						<div id="apps">
 							<ul>
@@ -98,54 +118,59 @@
 							</ul>
 						</div>
 					</div>
-				</nav>
+				</nav> -->
 
 			</div>
 
 			<div class="header-right">
-				<div id="unified-search"></div>
-				<div id="notifications"></div>
-				<div id="contactsmenu">
-					<div class="icon-contacts menutoggle" tabindex="0" role="button"
-					aria-haspopup="true" aria-controls="contactsmenu-menu" aria-expanded="false">
-						<span class="hidden-visually"><?php p($l->t('Contacts'));?></span>
-					</div>
-					<div id="contactsmenu-menu" class="menu"
-						aria-label="<?php p($l->t('Contacts menu'));?>"></div>
-				</div>
-				<div id="settings">
-					<div id="expand" tabindex="0" role="button" class="menutoggle"
-						aria-label="<?php p($l->t('Settings'));?>"
-						aria-haspopup="true" aria-controls="expanddiv" aria-expanded="false">
-						<div class="avatardiv<?php if ($_['userAvatarSet']) {
-				print_unescaped(' avatardiv-shown');
-			} else {
-				print_unescaped('" style="display: none');
-			} ?>">
-							<?php if ($_['userAvatarSet']): ?>
-								<img alt="" width="32" height="32"
-								src="<?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 32, 'v' => $_['userAvatarVersion']]));?>"
-								srcset="<?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 64, 'v' => $_['userAvatarVersion']]));?> 2x, <?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 128, 'v' => $_['userAvatarVersion']]));?> 4x"
-								>
-							<?php endif; ?>
+				<?php if(!$_['is_admin']): ?>
+					<button id="login-btn"><span data-l10n-id="login">Login</span></button>
+					<button id="create-account-btn"><span data-l10n-id="create_account">Create Free Account</span></button>
+				<?php else: ?>
+					<div id="unified-search"></div>
+					<div id="notifications"></div>
+					<div id="contactsmenu">
+						<div class="icon-contacts menutoggle" tabindex="0" role="button"
+						aria-haspopup="true" aria-controls="contactsmenu-menu" aria-expanded="false">
+							<span class="hidden-visually"><?php p($l->t('Contacts'));?></span>
 						</div>
-						<div id="expandDisplayName" class="icon-settings-white"></div>
+						<div id="contactsmenu-menu" class="menu"
+							aria-label="<?php p($l->t('Contacts menu'));?>"></div>
 					</div>
-					<nav class="settings-menu" id="expanddiv" style="display:none;"
-						aria-label="<?php p($l->t('Settings menu'));?>">
-					<ul>
-					<?php foreach ($_['settingsnavigation'] as $entry):?>
-						<li data-id="<?php p($entry['id']); ?>">
-							<a href="<?php print_unescaped($entry['href']); ?>"
-								<?php if ($entry["active"]): ?> class="active"<?php endif; ?>>
-								<img alt="" src="<?php print_unescaped($entry['icon'] . '?v=' . $_['versionHash']); ?>">
-								<?php p($entry['name']) ?>
-							</a>
-						</li>
-					<?php endforeach; ?>
-					</ul>
-					</nav>
-				</div>
+					<div id="settings">
+						<div id="expand" tabindex="0" role="button" class="menutoggle"
+							aria-label="<?php p($l->t('Settings'));?>"
+							aria-haspopup="true" aria-controls="expanddiv" aria-expanded="false">
+							<div class="avatardiv<?php if ($_['userAvatarSet']) {
+									print_unescaped(' avatardiv-shown');
+								} else {
+									print_unescaped('" style="display: none');
+								} ?>">
+								<?php if ($_['userAvatarSet']): ?>
+									<img alt="" width="32" height="32"
+									src="<?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 32, 'v' => $_['userAvatarVersion']]));?>"
+									srcset="<?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 64, 'v' => $_['userAvatarVersion']]));?> 2x, <?php p(\OC::$server->getURLGenerator()->linkToRoute('core.avatar.getAvatar', ['userId' => $_['user_uid'], 'size' => 128, 'v' => $_['userAvatarVersion']]));?> 4x"
+									>
+								<?php endif; ?>
+							</div>
+							<div id="expandDisplayName" class="icon-settings-white"></div>
+						</div>
+						<nav class="settings-menu" id="expanddiv" style="display:none;"
+							aria-label="<?php p($l->t('Settings menu'));?>">
+						<ul>
+						<?php foreach ($_['settingsnavigation'] as $entry):?>
+							<li data-id="<?php p($entry['id']); ?>">
+								<a href="<?php print_unescaped($entry['href']); ?>"
+									<?php if ($entry["active"]): ?> class="active"<?php endif; ?>>
+									<img alt="" src="<?php print_unescaped($entry['icon'] . '?v=' . $_['versionHash']); ?>">
+									<?php p($entry['name']) ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+						</nav>
+					</div>
+				<?php endif; ?>
 			</div>
 		</header>
 

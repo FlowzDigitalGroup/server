@@ -704,3 +704,36 @@ header .emptycontent {
 		width: 48px;
 	}
 }
+
+/* Flowz header changes  */
+header #appmenu {
+	li.flowz-links{
+		a {
+			width: auto;
+			margin: 12px;
+			text-align: left;
+			letter-spacing: 0px;
+			color: #FFFFFF;
+			opacity: 1;
+		}
+	}
+}
+
+button#login-btn {
+	background: transparent linear-gradient(274deg, #00AAFF 0%, #0A84FF 100%) 0% 0% no-repeat padding-box;
+	opacity: 1;
+	border: 2px solid #FFFFFF;
+	border-radius: 15px;
+	span {
+		color: #FFFFFF;
+	}
+}
+button#create-account-btn {
+	background: transparent linear-gradient(180deg, #F4AD29 0%, #F48B00 100%) 0% 0% no-repeat padding-box;
+	border-color:#F48B00;
+	border-radius: 15px;
+	opacity: 1;
+	span {
+		color: #FFFFFF;
+	}
+}

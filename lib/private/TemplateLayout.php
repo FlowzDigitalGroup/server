@@ -125,6 +125,7 @@ class TemplateLayout extends \OC_Template {
 			$userDisplayName = \OC_User::getDisplayName();
 			$this->assign('user_displayname', $userDisplayName);
 			$this->assign('user_uid', \OC_User::getUser());
+			$this->assign('is_admin', \OC_User::isAdminUser(\OC_User::getUser()));
 
 			if (\OC_User::getUser() === false) {
 				$this->assign('userAvatarSet', false);

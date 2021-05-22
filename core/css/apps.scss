@@ -1290,3 +1290,35 @@ $outter-margin: ($popoveritem-height - $popovericon-size) / 2;
 		display: flex;
 	}
 }
+
+/* FLOWZ DASHBOARD WIDGET ------------------------------------------------------------ */
+#app-dashboard {
+	margin-top: 50px;
+	background: transparent linear-gradient(274deg, #00AAFF 0%, #0A84FF 100%) 0% 0% no-repeat padding-box;
+}
+#app-dashboard .statuses,
+#app-dashboard > h2 {
+	display: none;
+}
+// #app-dashboard > h2 {
+// 	color: #000 !important;
+// 	background: #F2FBFF 0% 0% no-repeat padding-box;
+// }
+#app-dashboard .panels {
+	background: #F2FBFF 0% 0% no-repeat padding-box;
+	border-radius: 40px 40px 0px 0px;
+
+	.panel {
+		background-color: #fff;
+	}
+	.panel div,
+	.panel div.panel--content{
+		background-color: #fff;
+		border-top-left-radius: 15px;
+    	border-top-right-radius: 15px;
+	}
+	.panel div.panel--header {
+		padding: 5px;
+		border-bottom: 2px solid #E5F6FF;
+	}
+}
